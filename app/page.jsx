@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import styles from './page.module.css';
 
 const navItems = ['Home', 'About', 'Events', 'Membership', 'Partners', 'Community', 'Contact'];
@@ -11,12 +14,13 @@ function CTAButton({ children, outline = false }) {
 }
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return <header className={styles.header}>
     <div className={styles.navWrap}>
       <a className={styles.logo} href="#top" aria-label="Investments Served home"><Mark /></a>
-      <nav aria-label="Main navigation"><ul>{navItems.map((item, index) => <li key={item}><a className={index === 0 ? styles.active : ''} href={`#${item.toLowerCase()}`}>{item}</a></li>)}</ul></nav>
+      <nav className={menuOpen ? styles.mobileOpen : ''} aria-label="Main navigation"><ul>{navItems.map((item, index) => <li key={item}><a onClick={() => setMenuOpen(false)} className={index === 0 ? styles.active : ''} href={`#${item.toLowerCase()}`}>{item}</a></li>)}</ul></nav>
       <a className={styles.navCta} href="#membership">Join the Community</a>
-      <button className={styles.menu} aria-label="Open menu"><i></i><i></i></button>
+      <button className={styles.menu} type="button" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i></i><i></i></button>
     </div>
   </header>;
 }
