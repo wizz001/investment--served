@@ -49,9 +49,9 @@ function Hero() {
 }
 
 const areas = [
-  { name: 'London', venue: 'Padium, Canary Wharf', day: 'Wednesday', time: '6:30pm', date: 'Every week' },
-  { name: 'Manchester', venue: 'Club de Padel, Deansgate', day: 'Thursday', time: '7:00pm', date: 'Every week' },
-  { name: 'Leeds', venue: 'The Padel Club, Roundhay', day: 'Tuesday', time: '6:30pm', date: 'Every week' },
+  { name: 'London', venue: 'Padium, Canary Wharf', sessions: [{ date: 'Wednesday 28 October 2026', shortDate: '28 Oct', time: '6:30pm' }, { date: 'Wednesday 18 November 2026', shortDate: '18 Nov', time: '6:30pm' }, { date: 'Wednesday 9 December 2026', shortDate: '9 Dec', time: '6:30pm' }] },
+  { name: 'Manchester', venue: 'Club de Padel, Deansgate', sessions: [{ date: 'Thursday 12 November 2026', shortDate: '12 Nov', time: '7:00pm' }, { date: 'Thursday 3 December 2026', shortDate: '3 Dec', time: '7:00pm' }, { date: 'Thursday 14 January 2027', shortDate: '14 Jan', time: '7:00pm' }] },
+  { name: 'Leeds', venue: 'The Padel Club, Roundhay', sessions: [{ date: 'Tuesday 27 October 2026', shortDate: '27 Oct', time: '6:30pm' }, { date: 'Tuesday 24 November 2026', shortDate: '24 Nov', time: '6:30pm' }, { date: 'Tuesday 15 December 2026', shortDate: '15 Dec', time: '6:30pm' }] },
 ];
 
 function BookingLegacy() {
@@ -99,11 +99,13 @@ function BookingLegacy() {
 
 function Booking() {
   const [area, setArea] = useState(0);
+  const [dateIndex, setDateIndex] = useState(0);
   const [form, setForm] = useState({ name: '', email: '' });
   const [touched, setTouched] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const event = areas[area];
+  const session = event.sessions[dateIndex];
   const isEmailValid = /\S+@\S+\.\S+/.test(form.email);
 
   const submit = (e) => {
@@ -117,12 +119,12 @@ function Booking() {
   return <section className={styles.booking} id="booking" aria-labelledby="booking-title">
     <div className={styles.bookingShell}>
       <div className={styles.bookingIntro}>
-        <p className={styles.sectionEyebrow}>Weekly members&apos; sessions</p>
+        <p className={styles.sectionEyebrow}>Upcoming members&apos; sessions</p>
         <h2 id="booking-title">Make time for<br /><em>the right room.</em></h2>
-        <p>Reserve your place at your local weekly Padel &amp; Property session. We&apos;ll send the session details to your inbox once your booking is complete.</p>
+        <p>Reserve your place at an upcoming local Padel &amp; Property session. We&apos;ll send the session details to your inbox once your booking is complete.</p>
         <dl className={styles.bookingFacts}>
           <div><dt>Format</dt><dd>In person</dd></div>
-          <div><dt>Frequency</dt><dd>Weekly</dd></div>
+          <div><dt>Dates</dt><dd>Selected events</dd></div>
           <div><dt>Reservation</dt><dd>£18.00</dd></div>
         </dl>
         <p className={styles.demoNotice}>This is a demonstration booking flow. No payment will be taken.</p>
@@ -132,7 +134,7 @@ function Booking() {
           <div className={styles.successMark}>✓</div>
           <p className={styles.sectionEyebrow}>Booking received</p>
           <h3>You&apos;re on the list.</h3>
-          <p>Thanks, {form.name.split(' ')[0]}. Your place is reserved for the {event.day.toLowerCase()} session in {event.name} at {event.time}. We&apos;ll send the details to {form.email}.</p>
+          <p>Thanks, {form.name.split(' ')[0]}. Your place is reserved for the {session.date} session in {event.name} at {session.time}. We&apos;ll send the details to {form.email}.</p>
           <button type="button" onClick={() => { setConfirmed(false); setForm({ name: '', email: '' }); setTouched({}); }}>Book another session <span>→</span></button>
         </div> : <form onSubmit={submit} noValidate>
           <div className={styles.cardTop}><span>Reserve your place</span><span className={styles.demoTag}>DEMO</span></div>
@@ -140,15 +142,18 @@ function Booking() {
           <fieldset className={styles.fieldset}>
             <legend>1. Choose your local session</legend>
             <div className={styles.areaTabs} role="tablist" aria-label="Event areas">
-              {areas.map((item, index) => <button type="button" role="tab" aria-selected={area === index} className={area === index ? styles.selected : ''} onClick={() => setArea(index)} key={item.name}>{item.name}</button>)}
+              {areas.map((item, index) => <button type="button" role="tab" aria-selected={area === index} className={area === index ? styles.selected : ''} onClick={() => { setArea(index); setDateIndex(0); }} key={item.name}>{item.name}</button>)}
             </div>
-            <div className={styles.eventDetail} aria-label={`${event.day} Padel and Property event, ${event.venue}, ${event.time}`}>
-              <div className={styles.dayBadge}><small>{event.day.slice(0, 3)}</small><b>{event.time}</b></div>
-              <div><strong>Padel &amp; Property</strong><span>{event.day}s · {event.venue}</span></div>
+            <div className={styles.dateChoices} role="group" aria-label="Choose an event date">
+              <span>Available dates</span><div>{event.sessions.map((item, index) => <button type="button" className={dateIndex === index ? styles.selectedDate : ''} aria-pressed={dateIndex === index} onClick={() => setDateIndex(index)} key={item.date}>{item.shortDate}</button>)}</div>
+            </div>
+            <div className={styles.eventDetail} aria-label={`${session.date} Padel and Property event, ${event.venue}, ${session.time}`}>
+              <div className={styles.dayBadge}><small>{session.date.slice(0, 3)}</small><b>{session.time}</b></div>
+              <div><strong>Padel &amp; Property</strong><span>{session.date} · {event.venue}</span></div>
               <em>In person</em>
             </div>
           </fieldset>
-          <aside className={styles.summary} aria-label="Booking summary"><span>Booking summary</span><b>{event.name} · {event.day}s, {event.time}</b><small>Padel &amp; Property · In person</small></aside>
+          <aside className={styles.summary} aria-label="Booking summary"><span>Booking summary</span><b>{event.name} · {session.date}, {session.time}</b><small>Padel &amp; Property · In person</small></aside>
           <fieldset className={styles.fieldset}>
             <legend>2. Your details</legend>
             <div className={styles.fields}>
