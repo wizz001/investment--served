@@ -215,8 +215,9 @@ function Booking() {
             <h3>Confirm payment</h3><p className={styles.stepHint}>Review your booking before continuing to the demonstration checkout.</p>
             <SessionPanel event={event} session={session} />
             <div className={styles.paymentReview}><div><span>Booking for</span><b>{form.name}</b><small>{form.email}</small></div><strong>£18.00</strong></div>
-            <p className={styles.demoCopy}>Demo checkout only — no payment will be taken.</p>
-            <div className={styles.stepActions}><button type="button" className={styles.backAction} onClick={() => setStep(2)}>Back</button><button type="button" className={styles.primaryAction} disabled={submitting} onClick={confirmPayment}>{submitting ? 'Confirming…' : <>Confirm demo payment <span>→</span></>}</button></div>
+            <div className={styles.stripeDemo}><div><b>stripe</b><span>Payment integration</span></div><p>Card details will be collected securely here once Stripe is connected.</p></div>
+            <p className={styles.demoCopy}>Demo checkout only — no card details or payment will be taken.</p>
+            <div className={styles.stepActions}><button type="button" className={styles.backAction} onClick={() => setStep(2)}>Back</button><button type="button" className={styles.primaryAction} disabled={submitting} onClick={confirmPayment}>{submitting ? 'Confirming…' : <>Confirm booking <span>→</span></>}</button></div>
           </div>}
         </>}
       </div>
