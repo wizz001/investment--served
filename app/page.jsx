@@ -187,7 +187,7 @@ function Booking() {
       <div className={styles.bookingIntro}>
         <p className={styles.sectionEyebrow}>Property. Padel. Connections.</p>
         <h2 id="booking-title">Your next opportunity<br /><em>starts on court.</em></h2>
-        <p>Meet people who share your ambition, talk property and build connections over a game of padel. Choose your city and book your place at the next Padel &amp; Property session.</p>
+        <p>Meet people who share your ambition, talk property and build connections over a game of padel. Choose your city and book your place at the next Investment Served session.</p>
         <dl className={styles.bookingFacts}><div><dt>Format</dt><dd>In person</dd></div><div><dt>Dates</dt><dd>Selected events</dd></div><div><dt>Reservation</dt><dd>£18.00</dd></div></dl>
       </div>
       <div className={styles.bookingCard}>
