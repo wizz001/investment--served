@@ -49,9 +49,10 @@ function Hero() {
 }
 
 const areas = [
-  { name: 'London', venue: 'Padium, Canary Wharf', sessions: [{ date: 'Wednesday 28 October 2026', shortDate: '28 Oct', time: '6:30pm' }, { date: 'Wednesday 18 November 2026', shortDate: '18 Nov', time: '6:30pm' }, { date: 'Wednesday 9 December 2026', shortDate: '9 Dec', time: '6:30pm' }] },
-  { name: 'Manchester', venue: 'Club de Padel, Deansgate', sessions: [{ date: 'Thursday 12 November 2026', shortDate: '12 Nov', time: '7:00pm' }, { date: 'Thursday 3 December 2026', shortDate: '3 Dec', time: '7:00pm' }, { date: 'Thursday 14 January 2027', shortDate: '14 Jan', time: '7:00pm' }] },
   { name: 'Stoke', venue: 'Venue to be confirmed', sessions: [{ date: 'Tuesday 27 October 2026', shortDate: '27 Oct', time: '6:30pm' }, { date: 'Tuesday 24 November 2026', shortDate: '24 Nov', time: '6:30pm' }, { date: 'Tuesday 15 December 2026', shortDate: '15 Dec', time: '6:30pm' }] },
+  { name: 'Manchester', venue: 'Club de Padel, Deansgate', sessions: [{ date: 'Thursday 12 November 2026', shortDate: '12 Nov', time: '7:00pm' }, { date: 'Thursday 3 December 2026', shortDate: '3 Dec', time: '7:00pm' }, { date: 'Thursday 14 January 2027', shortDate: '14 Jan', time: '7:00pm' }] },
+  { name: 'Liverpool', venue: 'Venue to be confirmed', sessions: [{ date: 'Wednesday 4 November 2026', shortDate: '4 Nov', time: '6:30pm' }, { date: 'Wednesday 2 December 2026', shortDate: '2 Dec', time: '6:30pm' }, { date: 'Wednesday 13 January 2027', shortDate: '13 Jan', time: '6:30pm' }] },
+  { name: 'Birmingham', venue: 'Venue to be confirmed', sessions: [{ date: 'Thursday 29 October 2026', shortDate: '29 Oct', time: '6:30pm' }, { date: 'Thursday 26 November 2026', shortDate: '26 Nov', time: '6:30pm' }, { date: 'Thursday 17 December 2026', shortDate: '17 Dec', time: '6:30pm' }] },
 ];
 
 function BookingLegacy() {
