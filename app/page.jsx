@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from './page.module.css';
 
-const navItems = ['Home', 'About', 'Events', 'Membership', 'Partners', 'Community', 'Contact'];
+const navItems = ['Home', 'About', 'Events', 'Partners', 'Community', 'Contact'];
 
 function Mark() {
   return <><img src="/images/brand-mark-white.png" alt="" className={styles.mark} /><img src="/images/brand-wordmark-white.png" alt="Investments Served" className={styles.wordmark} /></>;
@@ -19,7 +19,7 @@ function Header() {
     <div className={styles.navWrap}>
       <a className={styles.logo} href="#top" aria-label="Investments Served home"><Mark /></a>
       <nav className={menuOpen ? styles.mobileOpen : ''} aria-label="Main navigation"><ul>{navItems.map((item, index) => <li key={item}><a onClick={() => setMenuOpen(false)} className={index === 0 ? styles.active : ''} href={`#${item.toLowerCase()}`}>{item}</a></li>)}</ul></nav>
-      <a className={styles.navCta} href="#membership">Join the Community</a>
+      <a className={styles.navCta} href="#booking">Book an Event</a>
       <button className={styles.menu} type="button" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i></i><i></i></button>
     </div>
   </header>;
@@ -40,7 +40,7 @@ function Hero() {
         <p className={styles.eyebrow}>Property <b>/</b> People <b>/</b> Performance</p>
         <h1 id="hero-title"><span>grow your wealth.</span><em>improve your health.</em></h1>
         <p className={styles.intro}>A premium property community bringing ambitious people together through business, padel and a healthier way of life.</p>
-        <div className={styles.actions}><CTAButton href="#booking">Book an Event</CTAButton><CTAButton outline href="#booking">Upcoming Events</CTAButton></div>
+        <div className={styles.actions}><CTAButton href="#booking">Book an Event</CTAButton></div>
       </section>
       <StatsBar />
       <div className={styles.caption}><span>More than networking</span><i /></div>
