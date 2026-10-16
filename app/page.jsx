@@ -171,7 +171,7 @@ function Booking() {
   const [area, setArea] = useState(0);
   const [dateIndex, setDateIndex] = useState(0);
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState({ name: '', email: '' });
+  const [form, setForm] = useState({ name: '', email: '', company: '', mobile: '' });
   const [touched, setTouched] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
