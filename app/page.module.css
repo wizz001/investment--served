@@ -39,3 +39,6 @@
 @media(max-width:1000px){.booking{padding:60px 40px}.bookingShell{grid-template-columns:320px minmax(0,1fr);gap:42px}.bookingIntro{max-width:320px}.bookingIntro h2{font-size:44px}.bookingCard{padding:29px}}
 @media(max-width:850px){.booking{padding:56px 28px}.bookingShell{grid-template-columns:1fr;gap:35px}.bookingIntro{max-width:620px;padding-top:0}.bookingIntro h2{font-size:46px}.bookingCard{max-width:760px}.fields{max-width:640px}}
 @media(max-width:520px){.booking{padding:48px 18px}.bookingShell{gap:30px}.bookingIntro h2{font-size:42px}.bookingFacts{max-width:360px}.bookingCard{padding:24px 18px}.steps li{font-size:10px}.steps li:not(:first-child){padding-left:8px}.areaTabs button{font-size:13px}.dateChoices button{height:38px;min-width:0;padding:0 7px;font-size:12px}.eventDetail{padding:15px 13px;gap:12px}.dayBadge{width:68px;min-height:50px}.eventDetail strong{font-size:15px}.eventDetail span,.eventDetail small{font-size:12px}.fields{grid-template-columns:1fr;gap:18px}.checkout{align-items:center}.checkout button{height:48px}.demoCopy{text-align:center}}
+
+/* The section is a full-width wrapper; the shell owns the two-column grid. */
+.booking{display:block}
