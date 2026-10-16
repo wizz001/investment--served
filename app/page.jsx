@@ -51,7 +51,7 @@ function Hero() {
 const areas = [
   { name: 'London', venue: 'Padium, Canary Wharf', sessions: [{ date: 'Wednesday 28 October 2026', shortDate: '28 Oct', time: '6:30pm' }, { date: 'Wednesday 18 November 2026', shortDate: '18 Nov', time: '6:30pm' }, { date: 'Wednesday 9 December 2026', shortDate: '9 Dec', time: '6:30pm' }] },
   { name: 'Manchester', venue: 'Club de Padel, Deansgate', sessions: [{ date: 'Thursday 12 November 2026', shortDate: '12 Nov', time: '7:00pm' }, { date: 'Thursday 3 December 2026', shortDate: '3 Dec', time: '7:00pm' }, { date: 'Thursday 14 January 2027', shortDate: '14 Jan', time: '7:00pm' }] },
-  { name: 'Leeds', venue: 'The Padel Club, Roundhay', sessions: [{ date: 'Tuesday 27 October 2026', shortDate: '27 Oct', time: '6:30pm' }, { date: 'Tuesday 24 November 2026', shortDate: '24 Nov', time: '6:30pm' }, { date: 'Tuesday 15 December 2026', shortDate: '15 Dec', time: '6:30pm' }] },
+  { name: 'Stoke', venue: 'Venue to be confirmed', sessions: [{ date: 'Tuesday 27 October 2026', shortDate: '27 Oct', time: '6:30pm' }, { date: 'Tuesday 24 November 2026', shortDate: '24 Nov', time: '6:30pm' }, { date: 'Tuesday 15 December 2026', shortDate: '15 Dec', time: '6:30pm' }] },
 ];
 
 function BookingLegacy() {
