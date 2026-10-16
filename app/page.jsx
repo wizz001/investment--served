@@ -97,7 +97,7 @@ function BookingLegacy() {
   </section>;
 }
 
-function Booking() {
+function BookingCombined() {
   const [area, setArea] = useState(0);
   const [dateIndex, setDateIndex] = useState(0);
   const [form, setForm] = useState({ name: '', email: '' });
@@ -165,6 +165,69 @@ function Booking() {
       </div>
     </div>
   </section>;
+}
+
+function Booking() {
+  const [area, setArea] = useState(0);
+  const [dateIndex, setDateIndex] = useState(0);
+  const [step, setStep] = useState(1);
+  const [form, setForm] = useState({ name: '', email: '' });
+  const [touched, setTouched] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
+  const event = areas[area];
+  const session = event.sessions[dateIndex];
+  const isEmailValid = /\S+@\S+\.\S+/.test(form.email);
+  const validDetails = form.name.trim() && isEmailValid;
+  const proceedDetails = (e) => { e.preventDefault(); setTouched({ name: true, email: true }); if (validDetails) setStep(3); };
+  const confirmPayment = () => { setSubmitting(true); window.setTimeout(() => { setSubmitting(false); setConfirmed(true); }, 650); };
+  const restart = () => { setConfirmed(false); setStep(1); setForm({ name: '', email: '' }); setTouched({}); };
+
+  return <section className={styles.booking} id="booking" aria-labelledby="booking-title">
+    <div className={styles.bookingShell}>
+      <div className={styles.bookingIntro}>
+        <p className={styles.sectionEyebrow}>Upcoming members&apos; sessions</p>
+        <h2 id="booking-title">Make time for<br /><em>the right room.</em></h2>
+        <p>Reserve your place at an upcoming local Padel &amp; Property session. We&apos;ll send the session details to your inbox once your booking is complete.</p>
+        <dl className={styles.bookingFacts}><div><dt>Format</dt><dd>In person</dd></div><div><dt>Dates</dt><dd>Selected events</dd></div><div><dt>Reservation</dt><dd>£18.00</dd></div></dl>
+        <p className={styles.demoNotice}>This is a demonstration booking flow. No payment will be taken.</p>
+      </div>
+      <div className={styles.bookingCard}>
+        {confirmed ? <div className={styles.confirmation} aria-live="polite">
+          <div className={styles.successMark}>✓</div><p className={styles.sectionEyebrow}>Booking received</p><h3>You&apos;re on the list.</h3>
+          <p>Thanks, {form.name.split(' ')[0]}. Your place is reserved for {session.date} in {event.name} at {session.time}. We&apos;ll send the details to {form.email}.</p><button type="button" onClick={restart}>Book another session <span>→</span></button>
+        </div> : <>
+          <div className={styles.cardTop}><span>Reserve your place</span><span className={styles.demoTag}>DEMO</span></div>
+          <ol className={styles.steps} aria-label="Booking progress"><li className={step === 1 ? styles.current : ''}>1 <span>Choose date</span></li><li className={step === 2 ? styles.current : ''}>2 <span>Your details</span></li><li className={step === 3 ? styles.current : ''}>3 <span>Confirm payment</span></li></ol>
+          {step === 1 && <div className={styles.stepPanel}>
+            <h3>Choose a date</h3><p className={styles.stepHint}>Select your city and preferred event date.</p>
+            <div className={styles.areaTabs} role="tablist" aria-label="Event areas">{areas.map((item, index) => <button type="button" role="tab" aria-selected={area === index} className={area === index ? styles.selected : ''} onClick={() => { setArea(index); setDateIndex(0); }} key={item.name}>{item.name}</button>)}</div>
+            <div className={styles.dateChoices} role="group" aria-label="Choose an event date"><span>Available dates</span><div>{event.sessions.map((item, index) => <button type="button" className={dateIndex === index ? styles.selectedDate : ''} aria-pressed={dateIndex === index} onClick={() => setDateIndex(index)} key={item.date}>{item.shortDate}</button>)}</div></div>
+            <SessionPanel event={event} session={session} /><div className={styles.stepActions}><button type="button" className={styles.primaryAction} onClick={() => setStep(2)}>Continue <span>→</span></button></div>
+          </div>}
+          {step === 2 && <form onSubmit={proceedDetails} noValidate className={styles.stepPanel}>
+            <h3>Your details</h3><p className={styles.stepHint}>We&apos;ll use these details to send your booking confirmation.</p>
+            <SessionPanel event={event} session={session} compact />
+            <div className={styles.fields}><label>Full name<input aria-invalid={touched.name && !form.name.trim()} value={form.name} onBlur={() => setTouched({ ...touched, name: true })} onChange={(e) => setForm({ ...form, name: e.target.value })} autoComplete="name" />{touched.name && !form.name.trim() && <small className={styles.error}>Please enter your name.</small>}</label><label>Email address<input aria-invalid={touched.email && !isEmailValid} type="email" value={form.email} onBlur={() => setTouched({ ...touched, email: true })} onChange={(e) => setForm({ ...form, email: e.target.value })} autoComplete="email" />{touched.email && !isEmailValid && <small className={styles.error}>Enter a valid email address.</small>}</label></div>
+            <div className={styles.stepActions}><button type="button" className={styles.backAction} onClick={() => setStep(1)}>Back</button><button type="submit" className={styles.primaryAction}>Continue <span>→</span></button></div>
+          </form>}
+          {step === 3 && <div className={styles.stepPanel}>
+            <h3>Confirm payment</h3><p className={styles.stepHint}>Review your booking before continuing to the demonstration checkout.</p>
+            <SessionPanel event={event} session={session} />
+            <div className={styles.paymentReview}><div><span>Booking for</span><b>{form.name}</b><small>{form.email}</small></div><strong>£18.00</strong></div>
+            <p className={styles.demoCopy}>Demo checkout only — no payment will be taken.</p>
+            <div className={styles.stepActions}><button type="button" className={styles.backAction} onClick={() => setStep(2)}>Back</button><button type="button" className={styles.primaryAction} disabled={submitting} onClick={confirmPayment}>{submitting ? 'Confirming…' : <>Confirm demo payment <span>→</span></>}</button></div>
+          </div>}
+        </>}
+      </div>
+    </div>
+  </section>;
+}
+
+function SessionPanel({ event, session, compact = false }) {
+  return <div className={`${styles.eventDetail} ${compact ? styles.compactSession : ''}`} aria-label={`${session.date} Padel and Property event, ${event.venue}, ${session.time}`}>
+    <div className={styles.dayBadge}><small>{session.date.slice(0, 3)}</small><b>{session.shortDate}</b></div><div><strong>{event.name} · Padel &amp; Property</strong><span>{session.date} · {session.time}</span><small>{event.venue} · In person</small></div>
+  </div>;
 }
 
 export default function Home() { return <><Header /><Hero /><Booking /></>; }
