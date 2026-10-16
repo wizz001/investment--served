@@ -138,7 +138,7 @@ function Booking() {
           <button type="button" onClick={() => { setConfirmed(false); setForm({ name: '', email: '' }); setTouched({}); }}>Book another session <span>→</span></button>
         </div> : <form onSubmit={submit} noValidate>
           <div className={styles.cardTop}><span>Reserve your place</span><span className={styles.demoTag}>DEMO</span></div>
-          <ol className={styles.steps} aria-label="Booking steps"><li className={styles.current}>1 <span>Session</span></li><li>2 <span>Your details</span></li><li>3 <span>Payment</span></li></ol>
+          <ol className={styles.steps} aria-label="Booking steps"><li className={styles.current}>1 <span>Booking details</span></li><li>2 <span>Payment</span></li><li>3 <span>Confirmation</span></li></ol>
           <fieldset className={styles.fieldset}>
             <legend>1. Choose your local session</legend>
             <div className={styles.areaTabs} role="tablist" aria-label="Event areas">
@@ -148,12 +148,10 @@ function Booking() {
               <span>Available dates</span><div>{event.sessions.map((item, index) => <button type="button" className={dateIndex === index ? styles.selectedDate : ''} aria-pressed={dateIndex === index} onClick={() => setDateIndex(index)} key={item.date}>{item.shortDate}</button>)}</div>
             </div>
             <div className={styles.eventDetail} aria-label={`${session.date} Padel and Property event, ${event.venue}, ${session.time}`}>
-              <div className={styles.dayBadge}><small>{session.date.slice(0, 3)}</small><b>{session.time}</b></div>
-              <div><strong>Padel &amp; Property</strong><span>{session.date} · {event.venue}</span></div>
-              <em>In person</em>
+              <div className={styles.dayBadge}><small>{session.date.slice(0, 3)}</small><b>{session.shortDate}</b></div>
+              <div><strong>{event.name} · Padel &amp; Property</strong><span>{session.date} · {session.time}</span><small>{event.venue} · In person</small></div>
             </div>
           </fieldset>
-          <aside className={styles.summary} aria-label="Booking summary"><span>Booking summary</span><b>{event.name} · {session.date}, {session.time}</b><small>Padel &amp; Property · In person</small></aside>
           <fieldset className={styles.fieldset}>
             <legend>2. Your details</legend>
             <div className={styles.fields}>
