@@ -127,7 +127,6 @@ function BookingCombined() {
           <div><dt>Dates</dt><dd>Selected events</dd></div>
           <div><dt>Reservation</dt><dd>£18.00</dd></div>
         </dl>
-        <p className={styles.demoNotice}>This is a demonstration booking flow. No payment will be taken.</p>
       </div>
       <div className={styles.bookingCard}>
         {confirmed ? <div className={styles.confirmation} aria-live="polite">
@@ -137,7 +136,7 @@ function BookingCombined() {
           <p>Thanks, {form.name.split(' ')[0]}. Your place is reserved for the {session.date} session in {event.name} at {session.time}. We&apos;ll send the details to {form.email}.</p>
           <button type="button" onClick={() => { setConfirmed(false); setForm({ name: '', email: '' }); setTouched({}); }}>Book another session <span>→</span></button>
         </div> : <form onSubmit={submit} noValidate>
-          <div className={styles.cardTop}><span>Book your place</span><span className={styles.demoTag}>DEMO</span></div>
+          <div className={styles.cardTop}><span>Book your place</span></div>
           <ol className={styles.steps} aria-label="Booking steps"><li className={styles.current}>1 <span>Booking details</span></li><li>2 <span>Payment</span></li><li>3 <span>Confirmation</span></li></ol>
           <fieldset className={styles.fieldset}>
             <legend>1. Choose your local session</legend>
@@ -190,14 +189,13 @@ function Booking() {
         <h2 id="booking-title">Your next opportunity<br /><em>starts on court.</em></h2>
         <p>Meet people who share your ambition, talk property and build connections over a game of padel. Choose your city and book your place at the next Padel &amp; Property session.</p>
         <dl className={styles.bookingFacts}><div><dt>Format</dt><dd>In person</dd></div><div><dt>Dates</dt><dd>Selected events</dd></div><div><dt>Reservation</dt><dd>£18.00</dd></div></dl>
-        <p className={styles.demoNotice}>This is a demonstration booking flow. No payment will be taken.</p>
       </div>
       <div className={styles.bookingCard}>
         {confirmed ? <div className={styles.confirmation} aria-live="polite">
           <div className={styles.successMark}>✓</div><p className={styles.sectionEyebrow}>Booking received</p><h3>You&apos;re on the list.</h3>
           <p>Thanks, {form.name.split(' ')[0]}. Your place is reserved for {session.date} in {event.name} at {session.time}. We&apos;ll send the details to {form.email}.</p><button type="button" onClick={restart}>Book another session <span>→</span></button>
         </div> : <>
-          <div className={styles.cardTop}><span>Book your place</span><span className={styles.demoTag}>DEMO</span></div>
+          <div className={styles.cardTop}><span>Book your place</span></div>
           <ol className={styles.steps} aria-label="Booking progress"><li className={step === 1 ? styles.current : ''}>1 <span>Choose date</span></li><li className={step === 2 ? styles.current : ''}>2 <span>Your details</span></li><li className={step === 3 ? styles.current : ''}>3 <span>Confirm payment</span></li></ol>
           {step === 1 && <div className={styles.stepPanel}>
             <h3>Choose your session</h3><p className={styles.stepHint}>First select a city, then choose an available date and review your session.</p>
