@@ -56,7 +56,7 @@ const areas = [
 
 function BookingLegacy() {
   const [area, setArea] = useState(0);
-  const [form, setForm] = useState({ name: '', email: '' });
+  const [form, setForm] = useState({ name: '', email: '', company: '', mobile: '' });
   const [confirmed, setConfirmed] = useState(false);
   const event = areas[area];
   const submit = (e) => { e.preventDefault(); if (form.name && form.email) setConfirmed(true); };
@@ -208,7 +208,7 @@ function Booking() {
           {step === 2 && <form onSubmit={proceedDetails} noValidate className={styles.stepPanel}>
             <h3>Your details</h3><p className={styles.stepHint}>We&apos;ll use these details to send your booking confirmation.</p>
             <SessionPanel event={event} session={session} compact />
-            <div className={styles.fields}><label>Full name<input aria-invalid={touched.name && !form.name.trim()} value={form.name} onBlur={() => setTouched({ ...touched, name: true })} onChange={(e) => setForm({ ...form, name: e.target.value })} autoComplete="name" />{touched.name && !form.name.trim() && <small className={styles.error}>Please enter your name.</small>}</label><label>Email address<input aria-invalid={touched.email && !isEmailValid} type="email" value={form.email} onBlur={() => setTouched({ ...touched, email: true })} onChange={(e) => setForm({ ...form, email: e.target.value })} autoComplete="email" />{touched.email && !isEmailValid && <small className={styles.error}>Enter a valid email address.</small>}</label></div>
+            <div className={styles.fields}><label>Full name<input aria-invalid={touched.name && !form.name.trim()} value={form.name} onBlur={() => setTouched({ ...touched, name: true })} onChange={(e) => setForm({ ...form, name: e.target.value })} autoComplete="name" />{touched.name && !form.name.trim() && <small className={styles.error}>Please enter your name.</small>}</label><label>Email address<input aria-invalid={touched.email && !isEmailValid} type="email" value={form.email} onBlur={() => setTouched({ ...touched, email: true })} onChange={(e) => setForm({ ...form, email: e.target.value })} autoComplete="email" />{touched.email && !isEmailValid && <small className={styles.error}>Enter a valid email address.</small>}</label><label>Company<input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} autoComplete="organization" /></label><label>Mobile number<input type="tel" value={form.mobile} onChange={(e) => setForm({ ...form, mobile: e.target.value })} autoComplete="tel" /></label></div>
             <div className={styles.stepActions}><button type="button" className={styles.backAction} onClick={() => setStep(1)}>Back</button><button type="submit" className={styles.primaryAction}>Continue <span>→</span></button></div>
           </form>}
           {step === 3 && <div className={styles.stepPanel}>
